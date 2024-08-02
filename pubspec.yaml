@@ -31,22 +31,22 @@ dependency_overrides:
     git:
       url: https://github.com/superlistapp/super_editor
       path: super_editor
-      ref: stable # or "main"
+      ref: main # or "main"
   super_editor_markdown:
     git:
       url: https://github.com/superlistapp/super_editor
       path: super_editor_markdown
-      ref: stable
+      ref: main
   super_text_layout:
     git:
       url: https://github.com/superlistapp/super_editor
       path: super_text_layout
-      ref: stable
+      ref: main
   attributed_text:
     git:
       url: https://github.com/superlistapp/super_editor
       path: attributed_text
-      ref: stable
+      ref: main
 
 flutter:
   uses-material-design: true

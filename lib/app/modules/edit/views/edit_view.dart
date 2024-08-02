@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ebook_builder/app/services/book_service.dart';
 import 'package:flutter/material.dart';
 
@@ -38,8 +40,17 @@ class EditView extends GetView<EditController> {
                     final markdown =
                         controller.book.chapters.toList()[index].content;
 
+                    log(markdown!);
+
+                    final document = deserializeMarkdownToDocument(
+                      markdown!,
+                      syntax: MarkdownSyntax.superEditor,
+                    );
+
+                    log(document.toString());
+
                     final editor = createDefaultDocumentEditor(
-                      document: deserializeMarkdownToDocument(markdown!),
+                      document: document,
                       composer: MutableDocumentComposer(),
                     );
 

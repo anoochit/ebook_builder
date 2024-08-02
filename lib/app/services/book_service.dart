@@ -43,21 +43,32 @@ class BookService {
       {required String title, required Id id}) async {
     final item = await isar.books.where().filter().idEqualTo(id).findFirst();
 
-    final templateDocument = MutableDocument(nodes: [
-      ParagraphNode(
-        id: Editor.createNodeId(),
-        text: AttributedText('This is a header'),
-        metadata: {
-          'blockType': header1Attribution,
-        },
-      ),
-      ParagraphNode(
-        id: Editor.createNodeId(),
-        text: AttributedText('This is the first paragraph'),
-      ),
-    ]);
+    final templateDocument = MutableDocument(
+      nodes: [
+        ParagraphNode(
+          id: Editor.createNodeId(),
+          text: AttributedText('Header'),
+          metadata: {
+            'blockType': header1Attribution,
+          },
+        ),
+        ParagraphNode(
+          id: Editor.createNodeId(),
+          text: AttributedText('This is the first paragraph'),
+        ),
+        ParagraphNode(
+          id: Editor.createNodeId(),
+          text: AttributedText('This is the second paragraph'),
+        ),
+      ],
+    );
 
-    final content = serializeDocumentToMarkdown(templateDocument);
+    final content = serializeDocumentToMarkdown(
+      templateDocument,
+      syntax: MarkdownSyntax.superEditor,
+    );
+
+    log(content);
 
     final chapter = Chapter()
       ..title = title
