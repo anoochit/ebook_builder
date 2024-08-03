@@ -17,12 +17,7 @@ class HomeController extends GetxController {
     bookInitStream();
     getBooks();
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
+  
   void bookInitStream() {
     bookStream = BookService.bookStream();
     bookStream.listen((book) {

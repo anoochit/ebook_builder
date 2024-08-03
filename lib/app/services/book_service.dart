@@ -79,7 +79,7 @@ class BookService {
       item!.chapters.add(chapter);
       item.chapters.save();
 
-      log('edit = ${id}');
+      log('edit = $id');
     });
   }
 

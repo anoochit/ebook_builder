@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:ebook_builder/app/services/book_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,6 +8,7 @@ import 'package:super_editor/super_editor.dart';
 import 'package:super_editor_markdown/super_editor_markdown.dart';
 
 import '../../../data/models/book.dart';
+import '../../../services/book_service.dart';
 import '../controllers/edit_controller.dart';
 
 class EditView extends GetView<EditController> {
@@ -40,19 +40,18 @@ class EditView extends GetView<EditController> {
                     final markdown =
                         controller.book.chapters.toList()[index].content;
 
-                    log(markdown!);
-
                     final document = deserializeMarkdownToDocument(
                       markdown!,
                       syntax: MarkdownSyntax.superEditor,
                     );
 
-                    log(document.toString());
-
                     final editor = createDefaultDocumentEditor(
                       document: document,
                       composer: MutableDocumentComposer(),
                     );
+
+                    editor.document
+                        .addListener((value) => log('${value.changes}'));
 
                     return SuperEditor(
                       editor: editor,
@@ -136,10 +135,10 @@ class EditView extends GetView<EditController> {
   }
 
   addNewChapter({required String title}) {
-    final _title = controller.chapterTitleController.text.trim();
+    final chapterTitle = title.trim();
 
-    if (_title.isNotEmpty) {
-      BookService.newChapter(id: controller.book.id, title: _title)
+    if (chapterTitle.isNotEmpty) {
+      BookService.newChapter(id: controller.book.id, title: chapterTitle)
           .then((value) {
         controller.refreshContent();
         Get.snackbar('Info', 'Chapter added');

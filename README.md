@@ -13,6 +13,7 @@ An e-book builder with WYSIWYG editor, export to EPUB file.
 - [ ] Add editor toolbar
 - [ ] Delete chapter
 - [ ] Update cover image
+- [ ] Export EPUB
 
 ## Screenshots
 
